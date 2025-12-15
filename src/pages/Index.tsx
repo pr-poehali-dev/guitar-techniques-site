@@ -248,7 +248,7 @@ const Index = () => {
                 <img 
                   src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/06641bed-6d72-4b45-aaf9-28d1b2b7c594.jpg" 
                   alt="" 
-                  className="absolute inset-0 w-full h-full object-contain"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
