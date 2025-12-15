@@ -345,7 +345,10 @@ const Index = () => {
                     <CardDescription className="text-base">{technique.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button className="w-full bg-gradient-to-r from-primary to-orange-600 hover:opacity-90">
+                    <Button 
+                      className="w-full bg-gradient-to-r from-primary to-orange-600 hover:opacity-90"
+                      onClick={() => setActiveTab('lessons')}
+                    >
                       <Icon name="PlayCircle" className="mr-2" size={20} />
                       Изучить технику
                     </Button>
