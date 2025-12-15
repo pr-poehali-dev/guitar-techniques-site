@@ -210,7 +210,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
       <div className="fixed inset-0 opacity-20 pointer-events-none">
         <img 
-          src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/702b7977-4dd9-4d34-aa34-dcd465e28cd5.jpg" 
+          src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/bdb5925b-c8db-4ce1-81e8-1a6c803213d5.jpg" 
           alt="" 
           className="w-full h-full object-cover"
         />
