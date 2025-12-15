@@ -22,7 +22,6 @@ interface Lesson {
   duration: string;
   steps: string[];
   tips: string[];
-  videoUrl: string;
 }
 
 const Index = () => {
@@ -85,7 +84,7 @@ const Index = () => {
       title: 'Освоение легато за 5 шагов',
       technique: 'Легато',
       duration: '15 мин',
-      videoUrl: 'https://www.youtube.com/embed/kqsW9c0kwGM',
+
       steps: [
         'Разогрейте пальцы легкими упражнениями на хроматической гамме',
         'Практикуйте hammer-on: поставьте палец на 5-й лад, затем резко опустите другой палец на 7-й лад без удара медиатором',
@@ -104,7 +103,7 @@ const Index = () => {
       title: 'Техника бенда для начинающих',
       technique: 'Бенд',
       duration: '12 мин',
-      videoUrl: 'https://www.youtube.com/embed/Mm2eYfj0SgA',
+
       steps: [
         'Выберите 3-ю струну, 7-й лад для первого бенда',
         'Зажмите струну указательным пальцем, добавьте средний и безымянный для поддержки',
@@ -123,7 +122,7 @@ const Index = () => {
       title: 'Выразительное вибрато',
       technique: 'Вибрато',
       duration: '10 мин',
-      videoUrl: 'https://www.youtube.com/embed/Xj5Q2ghBeUs',
+
       steps: [
         'Зажмите любую ноту на грифе безымянным пальцем',
         'Раскачивайте струну вверх-вниз или из стороны в сторону',
@@ -142,7 +141,7 @@ const Index = () => {
       title: 'Слайд-техника: плавные переходы',
       technique: 'Слайд',
       duration: '11 мин',
-      videoUrl: 'https://www.youtube.com/embed/zE7rZGY8uGE',
+
       steps: [
         'Зажмите струну на любом ладу средним пальцем',
         'Ударьте по струне медиатором и сразу начните скользить пальцем вверх или вниз',
@@ -161,7 +160,7 @@ const Index = () => {
       title: 'Пальм-мьютинг в рок-музыке',
       technique: 'Пальминг',
       duration: '14 мин',
-      videoUrl: 'https://www.youtube.com/embed/P8p-ffgR0d8',
+
       steps: [
         'Положите ребро ладони правой руки на струны у бриджа',
         'Найдите точку, где звук становится глухим, но не полностью заглушенным',
@@ -180,7 +179,7 @@ const Index = () => {
       title: 'Тэппинг: техника двух рук',
       technique: 'Тэппинг',
       duration: '18 мин',
-      videoUrl: 'https://www.youtube.com/embed/JzqumbhfxRo',
+
       steps: [
         'Используйте указательный или средний палец правой руки для "удара" по ладу',
         'Начните с простой последовательности: тэп на 12-м ладу, pull-off на 5-м, 0 (открытая)',
@@ -376,17 +375,6 @@ const Index = () => {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="mb-6">
-                      <div className="relative rounded-xl overflow-hidden border-2 border-primary/30" style={{ paddingBottom: '56.25%' }}>
-                        <iframe
-                          className="absolute top-0 left-0 w-full h-full"
-                          src={lesson.videoUrl}
-                          title={lesson.title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      </div>
-                    </div>
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="steps">
                         <AccordionTrigger className="text-lg font-semibold hover:text-primary">
