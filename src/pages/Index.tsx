@@ -470,7 +470,7 @@ const Index = () => {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Icon name="Music" className="text-primary" size={24} />
           </div>
-          <p>© 2024 Гитарные техники. Все права защищены.</p>
+          <p>© 2026 И.П Лисин Егор</p>
         </div>
       </footer>
     </div>
