@@ -246,9 +246,9 @@ const Index = () => {
             <section className="py-20 text-center relative overflow-hidden">
               <div className="absolute inset-0 opacity-20">
                 <img 
-                  src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/5a4bc93b-59f4-46bb-8dad-aafad0550639.jpg" 
+                  src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/06641bed-6d72-4b45-aaf9-28d1b2b7c594.jpg" 
                   alt="" 
-                  className="absolute inset-0 w-full h-full object-cover blur-md"
+                  className="absolute inset-0 w-full h-full object-contain blur-md"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
