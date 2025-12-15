@@ -248,17 +248,7 @@ const Index = () => {
                 <img 
                   src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/5a4bc93b-59f4-46bb-8dad-aafad0550639.jpg" 
                   alt="" 
-                  className="absolute top-0 left-0 w-1/3 h-auto object-cover blur-sm"
-                />
-                <img 
-                  src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/9e2991b6-c78a-4ddb-b113-afb606165443.jpg" 
-                  alt="" 
-                  className="absolute bottom-0 right-0 w-1/3 h-auto object-cover blur-sm"
-                />
-                <img 
-                  src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/e746844c-2f8d-4d9b-9fdb-443b37ac309c.jpg" 
-                  alt="" 
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/4 h-auto object-cover blur-md opacity-50"
+                  className="absolute inset-0 w-full h-full object-cover blur-md"
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
