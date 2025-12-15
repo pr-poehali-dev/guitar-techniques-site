@@ -254,35 +254,35 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
               
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {[...Array(12)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute bottom-0 w-2 h-2 rounded-full animate-fountain-burst"
-                    style={{
-                      left: `${20 + i * 5}%`,
-                      background: i % 2 === 0 ? 'linear-gradient(to top, #F97316, #FBBF24)' : 'linear-gradient(to top, #8B5CF6, #EC4899)',
-                      animationDelay: `${i * 0.2}s`
-                    }}
-                  />
+                {[0, 1, 2, 3, 4].map((fountainIndex) => (
+                  <div key={`fountain-${fountainIndex}`} className="absolute bottom-0" style={{ left: `${15 + fountainIndex * 17}%` }}>
+                    <div
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-64 animate-fountain-core"
+                      style={{
+                        background: 'linear-gradient(to top, rgba(255,255,255,0.9), rgba(251,191,36,0.6), transparent)',
+                        boxShadow: '0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(251,191,36,0.6)',
+                        animationDelay: `${fountainIndex * 0.15}s`
+                      }}
+                    />
+                    
+                    {[...Array(30)].map((_, sparkIndex) => {
+                      const spreadX = (Math.random() - 0.5) * 80;
+                      const delay = Math.random() * 0.3;
+                      return (
+                        <div
+                          key={`spark-${fountainIndex}-${sparkIndex}`}
+                          className="absolute bottom-0 left-1/2 w-1 h-1 rounded-full animate-fountain-spark"
+                          style={{
+                            background: sparkIndex % 3 === 0 ? '#FFFFFF' : sparkIndex % 3 === 1 ? '#FBBF24' : '#FCD34D',
+                            boxShadow: '0 0 4px rgba(255,255,255,0.8)',
+                            '--spread-x': `${spreadX}px`,
+                            animationDelay: `${fountainIndex * 0.15 + delay}s`
+                          } as React.CSSProperties}
+                        />
+                      );
+                    })}
+                  </div>
                 ))}
-                
-                {[...Array(20)].map((_, i) => (
-                  <div
-                    key={`spark-${i}`}
-                    className="absolute w-1 h-1 rounded-full animate-spark-fly"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                      background: i % 3 === 0 ? '#F97316' : i % 3 === 1 ? '#8B5CF6' : '#FBBF24',
-                      '--spark-x': `${(Math.random() - 0.5) * 200}px`,
-                      '--spark-y': `${(Math.random() - 0.5) * 200}px`,
-                      animationDelay: `${Math.random() * 2}s`
-                    } as React.CSSProperties}
-                  />
-                ))}
-                
-                <div className="absolute left-1/4 top-1/3 w-32 h-32 rounded-full bg-gradient-to-br from-primary/30 to-transparent blur-2xl animate-glow-pulse" />
-                <div className="absolute right-1/4 top-2/3 w-40 h-40 rounded-full bg-gradient-to-br from-secondary/30 to-transparent blur-2xl animate-glow-pulse" style={{ animationDelay: '1s' }} />
               </div>
               
               <div className="relative z-10">
