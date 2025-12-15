@@ -150,21 +150,21 @@ const Index = () => {
       title: 'Топ-10 техник для соло',
       duration: '18:32',
       thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/92d39db7-6ddb-43e9-8506-30bf2469b66f.jpg',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+      videoUrl: 'https://www.youtube.com/embed/JzqumbhfxRo'
     },
     {
       id: '2',
       title: 'Скоростное легато',
       duration: '12:15',
       thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/89965e9a-14bf-43ca-b3e9-f7cb65543b98.jpg',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+      videoUrl: 'https://www.youtube.com/embed/kqsW9c0kwGM'
     },
     {
       id: '3',
       title: 'Мастер-класс: свип',
       duration: '22:48',
       thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/c67c06c6-245b-400e-9f28-7220757587af.jpg',
-      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+      videoUrl: 'https://www.youtube.com/embed/gQA8_5Q8pxI'
     }
   ];
 
