@@ -256,7 +256,7 @@ const Index = () => {
               <div className="absolute bottom-0 left-0 right-0 h-full pointer-events-none overflow-hidden">
                 {[0, 1, 2, 3, 4].map((fountainIndex) => (
                   <div key={`fountain-${fountainIndex}`} className="absolute bottom-0 h-full" style={{ left: `${15 + fountainIndex * 17}%` }}>
-                    {[...Array(200)].map((_, sparkIndex) => {
+                    {[...Array(120)].map((_, sparkIndex) => {
                       const spreadX = (Math.random() - 0.5) * 180;
                       const riseY = -400 - Math.random() * 500;
                       const delay = Math.random() * 0.5;
