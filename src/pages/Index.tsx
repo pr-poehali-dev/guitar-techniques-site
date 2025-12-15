@@ -253,30 +253,36 @@ const Index = () => {
             <section className="py-20 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
               
-              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute bottom-0 left-0 right-0 h-full pointer-events-none overflow-hidden">
                 {[0, 1, 2, 3, 4].map((fountainIndex) => (
-                  <div key={`fountain-${fountainIndex}`} className="absolute bottom-0" style={{ left: `${15 + fountainIndex * 17}%` }}>
+                  <div key={`fountain-${fountainIndex}`} className="absolute bottom-0 h-full" style={{ left: `${15 + fountainIndex * 17}%` }}>
                     <div
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-64 animate-fountain-core"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-full animate-fountain-core"
                       style={{
-                        background: 'linear-gradient(to top, rgba(255,255,255,0.9), rgba(251,191,36,0.6), transparent)',
-                        boxShadow: '0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(251,191,36,0.6)',
-                        animationDelay: `${fountainIndex * 0.15}s`
+                        background: 'linear-gradient(to top, rgba(255,255,255,0.9), rgba(251,191,36,0.7), rgba(251,191,36,0.3), transparent)',
+                        boxShadow: '0 0 30px rgba(255,255,255,0.9), 0 0 60px rgba(251,191,36,0.7)',
+                        animationDelay: `${fountainIndex * 0.1}s`
                       }}
                     />
                     
-                    {[...Array(30)].map((_, sparkIndex) => {
-                      const spreadX = (Math.random() - 0.5) * 80;
-                      const delay = Math.random() * 0.3;
+                    {[...Array(60)].map((_, sparkIndex) => {
+                      const spreadX = (Math.random() - 0.5) * 150;
+                      const riseY = -300 - Math.random() * 400;
+                      const delay = Math.random() * 0.4;
+                      const size = Math.random() > 0.7 ? 2 : 1;
                       return (
                         <div
                           key={`spark-${fountainIndex}-${sparkIndex}`}
-                          className="absolute bottom-0 left-1/2 w-1 h-1 rounded-full animate-fountain-spark"
+                          className="absolute bottom-0 left-1/2 rounded-full animate-fountain-spark"
                           style={{
-                            background: sparkIndex % 3 === 0 ? '#FFFFFF' : sparkIndex % 3 === 1 ? '#FBBF24' : '#FCD34D',
-                            boxShadow: '0 0 4px rgba(255,255,255,0.8)',
+                            width: `${size}px`,
+                            height: `${size}px`,
+                            background: sparkIndex % 4 === 0 ? '#FFFFFF' : sparkIndex % 4 === 1 ? '#FBBF24' : sparkIndex % 4 === 2 ? '#FCD34D' : '#F59E0B',
+                            boxShadow: `0 0 ${size * 4}px rgba(255,255,255,0.9), 0 0 ${size * 8}px rgba(251,191,36,0.6)`,
                             '--spread-x': `${spreadX}px`,
-                            animationDelay: `${fountainIndex * 0.15 + delay}s`
+                            '--rise-y': `${riseY}px`,
+                            animationDelay: `${fountainIndex * 0.1 + delay}s`,
+                            animationDuration: `${1.2 + Math.random() * 0.6}s`
                           } as React.CSSProperties}
                         />
                       );

@@ -122,8 +122,11 @@ export default {
 						transform: 'translateY(0) translateX(0) scale(1)',
 						opacity: '1'
 					},
+					'70%': {
+						opacity: '0.8'
+					},
 					'100%': {
-						transform: 'translateY(-200px) translateX(var(--spread-x)) scale(0.3)',
+						transform: 'translateY(var(--rise-y)) translateX(var(--spread-x)) scale(0.2)',
 						opacity: '0'
 					}
 				},
@@ -136,7 +139,7 @@ export default {
 						opacity: '1'
 					},
 					'100%': {
-						transform: 'translateY(-250px) scaleY(1)',
+						transform: 'translateY(-400px) scaleY(1.5)',
 						opacity: '0'
 					}
 				},
