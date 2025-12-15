@@ -24,17 +24,8 @@ interface Lesson {
   tips: string[];
 }
 
-interface Video {
-  id: string;
-  title: string;
-  duration: string;
-  thumbnail: string;
-  videoUrl?: string;
-}
-
 const Index = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   const techniques: Technique[] = [
     {
@@ -144,29 +135,7 @@ const Index = () => {
     }
   ];
 
-  const videos: Video[] = [
-    {
-      id: '1',
-      title: 'Топ-10 техник для соло',
-      duration: '18:32',
-      thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/92d39db7-6ddb-43e9-8506-30bf2469b66f.jpg',
-      videoUrl: 'https://www.youtube.com/embed/JzqumbhfxRo'
-    },
-    {
-      id: '2',
-      title: 'Скоростное легато',
-      duration: '12:15',
-      thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/89965e9a-14bf-43ca-b3e9-f7cb65543b98.jpg',
-      videoUrl: 'https://www.youtube.com/embed/kqsW9c0kwGM'
-    },
-    {
-      id: '3',
-      title: 'Мастер-класс: свип',
-      duration: '22:48',
-      thumbnail: 'https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/c67c06c6-245b-400e-9f28-7220757587af.jpg',
-      videoUrl: 'https://www.youtube.com/embed/gQA8_5Q8pxI'
-    }
-  ];
+
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -203,12 +172,6 @@ const Index = () => {
               onClick={() => setActiveTab('lessons')}
             >
               Уроки
-            </Button>
-            <Button 
-              variant={activeTab === 'videos' ? 'default' : 'ghost'} 
-              onClick={() => setActiveTab('videos')}
-            >
-              Видео
             </Button>
           </nav>
           <Button className="md:hidden" variant="ghost" size="icon">
@@ -399,70 +362,7 @@ const Index = () => {
           </div>
         )}
 
-        {activeTab === 'videos' && (
-          <div className="animate-fade-in">
-            <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Видео уроки
-            </h2>
-            {selectedVideo ? (
-              <div className="max-w-4xl mx-auto">
-                <Button 
-                  variant="ghost" 
-                  onClick={() => setSelectedVideo(null)}
-                  className="mb-4 hover:text-primary"
-                >
-                  <Icon name="ArrowLeft" className="mr-2" size={20} />
-                  Назад к списку
-                </Button>
-                <Card className="overflow-hidden border-2 border-primary/50">
-                  <div className="relative" style={{ paddingBottom: '56.25%' }}>
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src={videos.find(v => v.id === selectedVideo)?.videoUrl}
-                      title="Video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-2xl">
-                      {videos.find(v => v.id === selectedVideo)?.title}
-                    </CardTitle>
-                  </CardHeader>
-                </Card>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {videos.map((video) => (
-                  <Card 
-                    key={video.id} 
-                    className="group overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer border-2 hover:border-primary/50"
-                    onClick={() => setSelectedVideo(video.id)}
-                  >
-                    <div className="relative">
-                      <img 
-                        src={video.thumbnail} 
-                        alt={video.title}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center">
-                          <Icon name="Play" className="text-white ml-1" size={32} />
-                        </div>
-                      </div>
-                      <Badge className="absolute bottom-2 right-2 bg-black/70 text-white border-0">
-                        {video.duration}
-                      </Badge>
-                    </div>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{video.title}</CardTitle>
-                    </CardHeader>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+
       </main>
 
       <footer className="border-t border-border/40 mt-20 py-8 bg-muted/10">
