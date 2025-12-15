@@ -256,20 +256,11 @@ const Index = () => {
               <div className="absolute bottom-0 left-0 right-0 h-full pointer-events-none overflow-hidden">
                 {[0, 1, 2, 3, 4].map((fountainIndex) => (
                   <div key={`fountain-${fountainIndex}`} className="absolute bottom-0 h-full" style={{ left: `${15 + fountainIndex * 17}%` }}>
-                    <div
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-full animate-fountain-core"
-                      style={{
-                        background: 'linear-gradient(to top, rgba(255,255,255,0.9), rgba(251,191,36,0.7), rgba(251,191,36,0.3), transparent)',
-                        boxShadow: '0 0 30px rgba(255,255,255,0.9), 0 0 60px rgba(251,191,36,0.7)',
-                        animationDelay: `${fountainIndex * 0.1}s`
-                      }}
-                    />
-                    
-                    {[...Array(60)].map((_, sparkIndex) => {
-                      const spreadX = (Math.random() - 0.5) * 150;
-                      const riseY = -300 - Math.random() * 400;
-                      const delay = Math.random() * 0.4;
-                      const size = Math.random() > 0.7 ? 2 : 1;
+                    {[...Array(120)].map((_, sparkIndex) => {
+                      const spreadX = (Math.random() - 0.5) * 180;
+                      const riseY = -400 - Math.random() * 500;
+                      const delay = Math.random() * 0.5;
+                      const size = Math.random() > 0.5 ? 3 : Math.random() > 0.3 ? 2 : 1.5;
                       return (
                         <div
                           key={`spark-${fountainIndex}-${sparkIndex}`}
@@ -278,11 +269,11 @@ const Index = () => {
                             width: `${size}px`,
                             height: `${size}px`,
                             background: sparkIndex % 4 === 0 ? '#FFFFFF' : sparkIndex % 4 === 1 ? '#FBBF24' : sparkIndex % 4 === 2 ? '#FCD34D' : '#F59E0B',
-                            boxShadow: `0 0 ${size * 4}px rgba(255,255,255,0.9), 0 0 ${size * 8}px rgba(251,191,36,0.6)`,
+                            boxShadow: `0 0 ${size * 5}px rgba(255,255,255,1), 0 0 ${size * 10}px rgba(251,191,36,0.8)`,
                             '--spread-x': `${spreadX}px`,
                             '--rise-y': `${riseY}px`,
-                            animationDelay: `${fountainIndex * 0.1 + delay}s`,
-                            animationDuration: `${1.2 + Math.random() * 0.6}s`
+                            animationDelay: `${fountainIndex * 0.08 + delay}s`,
+                            animationDuration: `${1 + Math.random() * 0.7}s`
                           } as React.CSSProperties}
                         />
                       );
