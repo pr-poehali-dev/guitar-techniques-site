@@ -207,8 +207,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <header className="border-b border-border/40 backdrop-blur-sm sticky top-0 z-50 bg-background/80">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
+      <div className="fixed inset-0 opacity-20 pointer-events-none">
+        <img 
+          src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/702b7977-4dd9-4d34-aa34-dcd465e28cd5.jpg" 
+          alt="" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <header className="border-b border-border/40 backdrop-blur-sm sticky top-0 z-50 bg-background/80 relative">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Icon name="Music" className="text-primary" size={32} />
@@ -240,17 +247,10 @@ const Index = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 relative">
         {activeTab === 'home' && (
           <div className="animate-fade-in">
             <section className="py-20 text-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                <img 
-                  src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/06641bed-6d72-4b45-aaf9-28d1b2b7c594.jpg" 
-                  alt="" 
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 blur-3xl animate-pulse" />
               <div className="relative z-10">
                 <h2 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
@@ -432,7 +432,7 @@ const Index = () => {
 
       </main>
 
-      <footer className="border-t border-border/40 mt-20 py-8 bg-muted/10">
+      <footer className="border-t border-border/40 mt-20 py-8 bg-muted/10 relative">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Icon name="Music" className="text-primary" size={24} />
