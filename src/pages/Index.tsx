@@ -209,7 +209,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 relative">
-      <Sparks />
+      {(activeTab === 'techniques' || activeTab === 'lessons') && <Sparks />}
       <div className="fixed inset-0 opacity-20 pointer-events-none">
         <img 
           src="https://cdn.poehali.dev/projects/fb031ac1-8d58-4cdb-b24d-50d83500b783/files/bdb5925b-c8db-4ce1-81e8-1a6c803213d5.jpg" 
