@@ -30,17 +30,18 @@ const Sparks = () => {
     const particles: Particle[] = [];
 
     const spawn = () => {
-      const count = Math.random() < 0.3 ? 2 : 1;
+      const count = Math.random() < 0.4 ? 3 : 2;
       for (let i = 0; i < count; i++) {
+        const maxLife = Math.random() * 60 + 100;
         particles.push({
           x: Math.random() * canvas.width,
-          y: canvas.height,
-          vx: (Math.random() - 0.5) * 2.5,
-          vy: -(Math.random() * 4 + 2),
+          y: canvas.height + 5,
+          vx: (Math.random() - 0.5) * 2,
+          vy: -(canvas.height / maxLife) * (Math.random() * 0.4 + 0.9),
           life: 0,
-          maxLife: Math.random() * 80 + 60,
-          size: Math.random() * 3 + 1,
-          hue: Math.random() * 40 + 20,
+          maxLife,
+          size: Math.random() * 3 + 1.5,
+          hue: Math.random() * 40 + 15,
         });
       }
     };
@@ -51,28 +52,29 @@ const Sparks = () => {
     const loop = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (frame % 4 === 0) spawn();
+      if (frame % 3 === 0) spawn();
       frame++;
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.04;
-        p.vx *= 0.99;
+        p.vx *= 0.998;
         p.life++;
 
         const progress = p.life / p.maxLife;
-        const alpha = 1 - progress;
-        const size = p.size * (1 - progress * 0.5);
+        const alpha = progress < 0.15
+          ? progress / 0.15
+          : 1 - (progress - 0.15) / 0.85;
+        const size = p.size * (1 - progress * 0.6);
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 2);
-        gradient.addColorStop(0, `hsla(${p.hue}, 100%, 90%, ${alpha})`);
-        gradient.addColorStop(0.5, `hsla(${p.hue}, 100%, 60%, ${alpha * 0.8})`);
-        gradient.addColorStop(1, `hsla(${p.hue}, 100%, 40%, 0)`);
-        ctx.fillStyle = gradient;
+        ctx.arc(p.x, p.y, Math.max(size, 0.1), 0, Math.PI * 2);
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3);
+        g.addColorStop(0, `hsla(${p.hue}, 100%, 95%, ${alpha})`);
+        g.addColorStop(0.4, `hsla(${p.hue}, 100%, 65%, ${alpha * 0.8})`);
+        g.addColorStop(1, `hsla(${p.hue}, 100%, 40%, 0)`);
+        ctx.fillStyle = g;
         ctx.fill();
 
         if (p.life >= p.maxLife) particles.splice(i, 1);
@@ -92,8 +94,8 @@ const Sparks = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed bottom-0 left-0 w-full pointer-events-none"
-      style={{ zIndex: 50, height: '100vh' }}
+      className="fixed inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 50 }}
     />
   );
 };
