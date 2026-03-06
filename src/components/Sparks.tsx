@@ -1,48 +1,64 @@
 import { useEffect, useRef } from 'react';
 
+const MAX_PARTICLES = 300;
+
 const Sparks = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
 
-    type Particle = {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      life: number;
-      maxLife: number;
-      size: number;
-      hue: number;
+    const onResize = () => {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
     };
+    window.addEventListener('resize', onResize);
 
-    const particles: Particle[] = [];
+    // Flat typed arrays — no object allocation per frame
+    const px   = new Float32Array(MAX_PARTICLES);
+    const py   = new Float32Array(MAX_PARTICLES);
+    const pvx  = new Float32Array(MAX_PARTICLES);
+    const pvy  = new Float32Array(MAX_PARTICLES);
+    const life = new Float32Array(MAX_PARTICLES);
+    const maxL = new Float32Array(MAX_PARTICLES);
+    const size = new Float32Array(MAX_PARTICLES);
+    const hue  = new Uint8Array(MAX_PARTICLES);
+    const alive = new Uint8Array(MAX_PARTICLES);
+
+    let count = 0;
 
     const spawn = () => {
-      const count = Math.random() < 0.4 ? 3 : 2;
-      for (let i = 0; i < count; i++) {
-        const maxLife = Math.random() * 50 + 110;
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: canvas.height + 5,
-          vx: (Math.random() - 0.5) * 1.5,
-          vy: -(canvas.height / maxLife) * (Math.random() * 0.3 + 0.95),
-          life: 0,
-          maxLife,
-          size: Math.random() * 3 + 1.5,
-          hue: Math.random() * 40 + 15,
-        });
+      if (count >= MAX_PARTICLES) return;
+      const n = Math.random() < 0.4 ? 3 : 2;
+      for (let i = 0; i < n && count < MAX_PARTICLES; i++) {
+        // find free slot
+        let slot = -1;
+        for (let j = 0; j < MAX_PARTICLES; j++) {
+          if (!alive[j]) { slot = j; break; }
+        }
+        if (slot < 0) return;
+
+        const ml = Math.random() * 50 + 110;
+        px[slot]   = Math.random() * W;
+        py[slot]   = H + 5;
+        pvx[slot]  = (Math.random() - 0.5) * 1.5;
+        pvy[slot]  = -(H / ml) * (Math.random() * 0.3 + 0.95);
+        life[slot] = 0;
+        maxL[slot] = ml;
+        size[slot] = Math.random() * 3 + 1.5;
+        hue[slot]  = (Math.random() * 40 + 15) | 0;
+        alive[slot] = 1;
+        count++;
       }
     };
 
@@ -50,35 +66,42 @@ const Sparks = () => {
     let animId: number;
 
     const loop = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, W, H);
 
       if (frame % 3 === 0) spawn();
       frame++;
 
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.999;
-        p.life++;
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        if (!alive[i]) continue;
 
-        const progress = p.life / p.maxLife;
-        const alpha =
-          progress < 0.1 ? progress / 0.1 : 1 - (progress - 0.1) / 0.9;
-        const size = Math.max(p.size * (1 - progress * 0.7), 0.1);
+        px[i]   += pvx[i];
+        py[i]   += pvy[i];
+        pvx[i]  *= 0.999;
+        life[i] += 1;
 
+        const progress = life[i] / maxL[i];
+
+        if (progress >= 1) {
+          alive[i] = 0;
+          count--;
+          continue;
+        }
+
+        const alpha = progress < 0.1
+          ? progress / 0.1
+          : 1 - (progress - 0.1) / 0.9;
+        const r = Math.max(size[i] * (1 - progress * 0.7), 0.3);
+        const h = hue[i];
+
+        // Simple filled circle — much faster than radial gradient
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = `hsl(${h},100%,75%)`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 3);
-        g.addColorStop(0, `hsla(${p.hue}, 100%, 95%, ${alpha})`);
-        g.addColorStop(0.4, `hsla(${p.hue}, 100%, 65%, ${alpha * 0.8})`);
-        g.addColorStop(1, `hsla(${p.hue}, 100%, 40%, 0)`);
-        ctx.fillStyle = g;
+        ctx.arc(px[i], py[i], r, 0, 6.2832);
         ctx.fill();
-
-        if (p.life >= p.maxLife) particles.splice(i, 1);
       }
 
+      ctx.globalAlpha = 1;
       animId = requestAnimationFrame(loop);
     };
 
@@ -86,7 +109,7 @@ const Sparks = () => {
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
